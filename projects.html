@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | WebLabX</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #0d1117; color: #e6edf3; font-family: sans-serif; text-align: center; }
+    nav a { color: #58a6ff; margin: 0 10px; text-decoration: none; font-weight: 500; }
+    nav a.active { color: #e6edf3; }
+    nav a:hover { text-decoration: underline; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .project-card {
+      background: #161b22;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 200px; /* Fixed height for consistent alignment */
+    }
+
+    .project-card h3 { color: #58a6ff; margin-bottom: 10px; }
+    .project-card p { flex-grow: 1; margin-bottom: 0; }
+    .project-card a { display: inline-block; margin-top: 10px; color: #58a6ff; text-decoration: none; font-weight: 500; }
+    .project-card a:hover { text-decoration: underline; }
+
+    /* Modal Styles */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); }
+    .modal-content { background:#161b22; margin:50px auto; padding:20px; width:420px; border-radius:10px; position:relative; color:#e6edf3; text-align:center; }
+    .close { position:absolute; right:15px; top:10px; font-size:24px; cursor:pointer; color:#58a6ff; }
+    .close:hover { color:#1f6feb; }
+    #game-area { width:400px; height:400px; background:#0d1117; border:2px solid #58a6ff; margin: 20px auto; position:relative; }
+    #box { width:50px; height:50px; background:#58a6ff; position:absolute; border-radius:8px; cursor:pointer; display:none; }
+    button { padding:10px 20px; border:none; border-radius:8px; cursor:pointer; background:#58a6ff; color:white; font-weight:bold; }
+    button:hover { background:#1f6feb; }
+    #quote-image {
+      width: 30%; /* Reduced size */
+      margin: 15px auto; /* Centered horizontally */
+      display: block; /* Ensures centering works */
+    }
+    
+    /* Remove the broken image reference */
+    .quote-placeholder {
+      width: 100px;
+      height: 100px;
+      background: #58a6ff;
+      border-radius: 50%;
+      margin: 15px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>WebLabX Projects</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html" class="active">Projects</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>🎮 Mini JS Game</h3>
+        <p>A small browser game built with JavaScript.</p>
+        <a href="#" id="view-game">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>🌈 CSS Animation Lab</h3>
+        <p>Fun experiments with CSS transitions and keyframes.</p>
+        <a href="#" id="view-css">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>📊 Data Dashboard</h3>
+        <p>A simple dashboard built using Chart.js for data visualization.</p>
+        <a href="#" id="view-chart">View Project</a>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>New Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>💬 Random Quote Generator</h3>
+        <p>Click to see a random inspirational quote using JavaScript.</p>
+        <a href="#" id="view-quote">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>😂 Meme Generator</h3>
+        <p>Generates a random meme for fun!</p>
+        <a href="#" id="view-meme">View Project</a>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>My Scratch Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>🐱 Scratch Profile</h3>
+        <p>Explore my Scratch projects and creations.</p>
+        <a href="https://scratch.mit.edu/users/adam040618/" target="_blank">View Project</a>
+      </div>
+    </div>
+  </section><div class="project-card">
+    <h3>⚡ Reaction Tester</h3>
+    <p>How fast can you click?</p>
+    <a href="#" id="view-reaction">View Project</a>
+  </div>  
+</main>
+
+<!-- Modal -->
+<div id="game-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>🎮 Mini JS Game</h2>
+    <p id="score">Score: 0</p>
+    <p id="timer">Time: 30s</p>
+    <button id="start-btn">Start Game</button>
+    <div id="game-area">
+      <div id="box"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CSS Animation Lab Modal -->
+<div id="css-animation-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>🌈 CSS Animation Lab</h2>
+    <p>Watch this box animate using pure CSS!</p>
+    <div id="animated-box"></div>
+  </div>
+</div>
+
+<!-- Chart Modal -->
+<div id="chart-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>📊 Data Dashboard</h2>
+    <canvas id="chart-canvas" width="400" height="400"></canvas>
+  </div>
+</div>
+
+<!-- Random Quote Generator Modal -->
+<div id="quote-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>💬 Random Quote Generator</h3>
+    <p id="quote-description">Get inspired with a random quote!</p>
+    <p id="quote-text">Click the button to get a quote!</p>
+    <!-- Replace broken image with placeholder -->
+    <div class="quote-placeholder">💭</div>
+    <button id="quote-btn">New Quote</button>
+  </div>
+</div>
+
+<div id="meme-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>😂 Meme Generator</h3>
+    <img id="meme-img" src="" style="width:100%; border-radius:8px;">
+    <button id="new-meme-btn">New Meme</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 WebLabX</p>
+</footer>
+
+<script src="js/projects.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/chart.js"></script>
+
+</body>
+</html>
+
+

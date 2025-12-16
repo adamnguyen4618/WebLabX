@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini JS Game | WebLabX</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    main {
+      text-align: center;
+      margin-top: 50px;
+    }
+    #game-area {
+      width: 400px;
+      height: 400px;
+      background: #161b22;
+      border: 2px solid #58a6ff;
+      margin: 20px auto;
+      position: relative;
+      border-radius: 10px;
+    }
+    #box {
+      width: 50px;
+      height: 50px;
+      background: #58a6ff;
+      position: absolute;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #score, #timer {
+      font-size: 1.2em;
+      margin: 10px;
+    }
+    button {
+      background: #58a6ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1f6feb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 Mini JS Game</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+    </nav>
+  </header>
+
+  <main>
+    <p id="score">Score: 0</p>
+    <p id="timer">Time: 30s</p>
+    <button id="start-btn">Start Game</button>
+    <div id="game-area">
+      <div id="box" style="display: none;"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 WebLabX</p>
+  </footer>
+
+  <script>
+    const box = document.getElementById('box');
+    const scoreDisplay = document.getElementById('score');
+    const timerDisplay = document.getElementById('timer');
+    const startBtn = document.getElementById('start-btn');
+    const gameArea = document.getElementById('game-area');
+
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval;
+    let timerInterval;
+
+    function randomPosition() {
+      const maxX = gameArea.clientWidth - box.clientWidth;
+      const maxY = gameArea.clientHeight - box.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      box.style.left = x + 'px';
+      box.style.top = y + 'px';
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreDisplay.textContent = 'Score: 0';
+      timerDisplay.textContent = 'Time: 30s';
+      startBtn.disabled = true;
+      box.style.display = 'block';
+
+      box.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = 'Score: ' + score;
+        randomPosition();
+      });
+
+      gameInterval = setInterval(randomPosition, 1000);
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = 'Time: ' + timeLeft + 's';
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      box.style.display = 'none';
+      startBtn.disabled = false;
+      alert('Time’s up! Your final score: ' + score);
+    }
+
+    startBtn.addEventListener('click', startGame);
+  </script>
+</body>
+</html>

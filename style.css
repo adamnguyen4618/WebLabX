@@ -1,0 +1,181 @@
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #0d1117;
+    color: #e6edf3;
+    text-align: center;
+  }
+  
+  header {
+    background: #161b22;
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    color: #58a6ff;
+  }
+  
+  section {
+    margin: 40px auto;
+    max-width: 600px;
+  }
+  
+  footer {
+    background: #161b22;
+    padding: 20px;
+    font-size: 0.9em;
+  }
+  /* Navigation */
+nav {
+  margin-top: 15px;
+}
+nav a {
+  color: #58a6ff; /* Reverted color */
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a.active {
+  color: #e6edf3; /* Reverted color */
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+body.project-page nav a {
+  color: #e6edf3; /* Reverted color for project page */
+}
+body.project-page nav a.active {
+  color: #58a6ff; /* Reverted color for project page */
+}
+
+body.project-active nav a {
+  color: #e6edf3; /* Color for non-active links when project is active */
+}
+body.project-active nav a.active {
+  color: #58a6ff; /* Color for active link when project is active */
+}
+
+/* Project grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.project-card {
+  background: #161b22;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.project-card h3 {
+  color: #58a6ff;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #58a6ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.project-card a:hover {
+  text-decoration: underline;
+}
+/* Modal Styles */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #0d1117;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #58a6ff;
+  width: 450px;
+  border-radius: 10px;
+  color: #e6edf3;
+  text-align: center;
+}
+
+.close {
+  color: #58a6ff;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover {
+  color: #1f6feb;
+}
+#game-area {
+  width: 400px;
+  height: 400px;
+  background: #161b22;
+  border: 2px solid #58a6ff;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 10px;
+}
+#box {
+  width: 50px;
+  height: 50px;
+  background: #58a6ff;
+  position: absolute;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#animated-box {
+  width: 100px;
+  height: 100px;
+  background: #58a6ff;
+  margin: 50px auto;
+  border-radius: 10px;
+  animation: moveAndColor 3s infinite alternate;
+}
+
+/* Keyframes for animation */
+@keyframes moveAndColor {
+  0%   { transform: translateX(0) rotate(0deg); background: #58a6ff; }
+  50%  { transform: translateX(150px) rotate(180deg); background: #ffdd57; }
+  100% { transform: translateX(0) rotate(360deg); background: #58a6ff; }
+}.project-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #58a6ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+/* CSS Animation Lab */
+#animated-box {
+  width: 50px;
+  height: 50px;
+  background: #58a6ff;
+  margin: 20px auto;
+  border-radius: 8px;
+  position: relative;
+  animation: moveBox 2s infinite alternate ease-in-out;
+}
+
+@keyframes moveBox {
+  0%   { left: 0; }
+  50%  { left: 150px; }
+  100% { left: 0; }
+}
