@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
       chartInstance = null; // Reset the chart instance
     }
 
+// Generate random data between 1 and 20
+  const randomData = Array.from({ length: 6 }, () => Math.floor(Math.random() * 20) + 1);
+
     chartInstance = new Chart(ctx, {
       type: "bar",
       data: {
@@ -37,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         datasets: [
           {
             label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
+            data: randomData,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -62,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         scales: {
           y: {
             beginAtZero: true,
+            max: 20,
           },
         },
       },

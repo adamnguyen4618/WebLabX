@@ -179,3 +179,18 @@ body.project-active nav a.active {
   50%  { left: 150px; }
   100% { left: 0; }
 }
+
+#change-color-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #58a6ff;
+  color: #e6edf3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#change-color-btn:hover {
+  background: #1f6feb;
+}
