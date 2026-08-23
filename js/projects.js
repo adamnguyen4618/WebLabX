@@ -214,3 +214,47 @@ document.getElementById('change-color-btn').addEventListener('click', function (
   const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   box.style.backgroundColor = randomColor;
 });
+
+  const birthDate = new Date('2017-04-06'); // Replace with your actual birthdate (YYYY-MM-DD)
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--; // Adjust age if the birthday hasn't occurred yet this year
+  }
+
+  const dataToSend = { name: 'Adam Nguyen', age: age };
+
+// fetch('http://127.0.0.1:5000/api/data', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(dataToSend),
+// })
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('Response from server:', data);
+//   })
+//   .catch(error => console.error('Error:', error));
+
+document.addEventListener("DOMContentLoaded", () => {
+  const serverMessageElement = document.getElementById("server-message");
+
+  // Replace '/api/message' with your server endpoint
+  fetch('http://127.0.0.1:5000/api/message')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Assuming the server sends a JSON object with a 'message' property
+      serverMessageElement.textContent = data.message;
+    })
+    .catch(error => {
+      console.error('Error fetching server message:', error);
+      serverMessageElement.textContent = "Failed to load message.";
+    });
+});
